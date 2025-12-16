@@ -22,10 +22,18 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse.SignUp> signUp(@RequestBody AuthRequest authRequest){
+    public ResponseEntity<AuthResponse.SignUpDTO> signUp(@RequestBody AuthRequest authRequest){
         System.out.println("SignUp 요청: " + authRequest.getEmail());
         User user = userService.signUp(authRequest);
-        AuthResponse.SignUp result = AuthResponse.SignUp.of(user);
+        AuthResponse.SignUpDTO result = AuthResponse.SignUpDTO.of(user);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse.LoginDTO> login(@RequestBody AuthRequest authRequest){
+        System.out.println("login 요청: " + authRequest.getEmail());
+        User user = userService.login(authRequest);
+        AuthResponse.LoginDTO result = AuthResponse.LoginDTO.of(user);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

@@ -9,14 +9,13 @@ public class AuthResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class SignUp {
+    public static class SignUpDTO {
         private Long userId;
         private String email;
         private String userName;
-        private String message;
 
-        public static SignUp of(User user) {
-            return SignUp.builder()
+        public static SignUpDTO of(User user) {
+            return SignUpDTO.builder()
                     .userId(user.getUserId())
                     .email(user.getEmail())
                     .userName(user.getUserName())
@@ -28,14 +27,13 @@ public class AuthResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class Login {
+    public static class LoginDTO {
         private Long userId;
         private String email;
         private String userName;
-        private String message;
 
-        public static Login of(User user) {
-            return Login.builder()
+        public static LoginDTO of(User user) {
+            return LoginDTO.builder()
                     .userId(user.getUserId())
                     .email(user.getEmail())
                     .userName(user.getUserName())
