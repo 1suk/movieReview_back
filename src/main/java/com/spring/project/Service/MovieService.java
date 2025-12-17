@@ -5,4 +5,5 @@ import com.spring.project.Entity.Movie;
 
 public interface MovieService {
     List<Movie> getAllMovies();
+    Movie getMovieById(Long id);
 }
