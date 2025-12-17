@@ -44,7 +44,7 @@ public class MovieResponse {
     @Builder
     public static class MovieListDTO {
         private List<MovieDTO> movies;
-        private int totalCount;
+        //private int totalCount;
 
         public static MovieListDTO of(List<Movie> movieList) {
             List<MovieDTO> movieDTOs = movieList.stream()
@@ -53,7 +53,7 @@ public class MovieResponse {
 
             return MovieListDTO.builder()
                     .movies(movieDTOs)
-                    .totalCount(movieDTOs.size())
+                    //.totalCount(movieDTOs.size())
                     .build();
         }
     }
