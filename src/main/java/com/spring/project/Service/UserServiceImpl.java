@@ -22,12 +22,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signUp(AuthRequest authRequest) {
-        User user = new User(
-                null,
-                authRequest.getEmail(),
-                authRequest.getUserName(),
-                authRequest.getPassword()
-        );
+        User user = User.builder()
+                .email(authRequest.getEmail())
+                .userName(authRequest.getUserName())
+                .password(authRequest.getPassword())
+                // reviews는 @Builder.Default로 빈 리스트 자동 설정
+                .build();
+
         return userRepository.save(user);
     }
 
