@@ -8,4 +8,5 @@ public interface ReviewService {
     Review createReview(ReviewDTO.Create createDto);
     List<ReviewDTO.Response> getReviewsByMovie(Long movieNo);
     ReviewDTO.Response updateReview(Long reviewNo,ReviewDTO.Update updateDto);
+    void deleteReview(Long reviewNo);
 }

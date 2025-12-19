@@ -48,4 +48,8 @@ public class ReviewRepositoryImpl implements ReviewRepository {
                 .stream()
                 .findFirst();
     }
+
+    public void delete(Review review) {
+        em.remove(review);
+    }
 }

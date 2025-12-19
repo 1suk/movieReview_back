@@ -88,5 +88,13 @@ public class ReviewServiceImpl implements ReviewService {
         return response;
     }
 
+    @Override
+    @Transactional(readOnly = false)
+
+    public void deleteReview(Long reviewNo) {
+        Review review = reviewRepository.findById(reviewNo)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 리뷰입니다."));
+        reviewRepository.delete(review);
+    }
 }
 

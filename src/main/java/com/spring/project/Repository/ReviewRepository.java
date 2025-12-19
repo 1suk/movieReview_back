@@ -10,4 +10,5 @@ public interface ReviewRepository {
     Review save(Review review);
     List<Review> findByMovieWithUser(Long movieNo);
     Optional<Review> findById(Long reviewNo);
+    void delete(Review review);
 }
