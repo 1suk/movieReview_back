@@ -80,7 +80,6 @@ src/main/java/com/spring/project/
 **Review (리뷰)**
 - 한 사용자는 한 영화에 하나의 리뷰만 작성 가능 
 - 평점(rating)과 내용(content) 포함
-- 작성일/수정일 자동 관리
 
 ```
 User (1) ----< (N) Review (N) >---- (1) Movie
