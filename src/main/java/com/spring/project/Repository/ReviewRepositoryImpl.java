@@ -4,6 +4,8 @@ import com.spring.project.Entity.Review;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import com.spring.project.Controller.dto.ReviewDTO;
+import java.util.stream.Collectors;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,20 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     }
 
     @Override
+    public List<Review> findReviewsByUserId(Long userId) {
+        String jpql = "SELECT r FROM Review r " +
+                "JOIN FETCH r.movie m " +
+                "JOIN FETCH r.user u " +
+                "WHERE u.userId = :userId " +
+                "ORDER BY r.rating DESC";
+
+        return em.createQuery(jpql, Review.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
+
+    @Override
     public Optional<Review> findById(Long reviewNo) {
         String jpql = "SELECT r FROM Review r " +
                 "JOIN FETCH r.user " +
@@ -42,11 +58,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
                 .setParameter("reviewNo", reviewNo)
                 .getResultList();
 
-        return em.createQuery(jpql, Review.class)
-                .setParameter("reviewNo", reviewNo)
-                .getResultList()
-                .stream()
-                .findFirst();
+        return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
     }
 
     public void delete(Review review) {

@@ -43,14 +43,14 @@ public class ReviewServiceImpl implements ReviewService {
 //        return reviewRepository.save(review);
 //    }
     @Override
-    public Review createReview(ReviewDTO.Create createDto){
+    public ReviewDTO.Response createReview(ReviewDTO.Create createDto){
         User user = userRepository.findById(createDto.getUserId())
                 .orElseThrow(()-> new UserNotFoundException(createDto.getUserId()));
         Movie movie = movieRepository.findById(createDto.getMovieNo())
                 .orElseThrow(() -> new MovieNotFoundException(createDto.getMovieNo()));
         Review review = createDto.toEntity(user,movie);
-
-        return reviewRepository.save(review);
+        Review saved = reviewRepository.save(review);
+        return ReviewDTO.Response.of(saved);
     }
 
     @Override
@@ -95,6 +95,15 @@ public class ReviewServiceImpl implements ReviewService {
         Review review = reviewRepository.findById(reviewNo)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 리뷰입니다."));
         reviewRepository.delete(review);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReviewDTO.ResponseWithMovie> getReviewsByUser(Long userId) {
+        List<Review> reviews = reviewRepository.findReviewsByUserId(userId);
+
+        return reviews.stream()
+                .map(ReviewDTO.ResponseWithMovie::of)
+                .toList();
     }
 }
 

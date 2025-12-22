@@ -88,4 +88,47 @@ public class ReviewDTO {
                     .build();
         }
     }
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class ResponseWithMovie{
+        private Long reviewNo;
+        private Long userId;
+        private String userName;
+        private Double rating;
+        private String content;
+        private LocalDate createdAt;
+        private LocalDate updatedAt;
+
+        private Long movieNo;
+        private String movieTitleKo;
+        private String movieTitle;
+        private String posterUrl;
+        private Integer year;
+        private String genre;
+        private String director;
+        private String cast;
+        public static ResponseWithMovie of(Review review) {
+            Movie movie = review.getMovie();
+            User user = review.getUser();
+            return ResponseWithMovie.builder()
+                    .reviewNo(review.getReviewNo())
+                    .userId(user.getUserId())
+                    .userName(user.getUserName())
+                    .rating(review.getRating())
+                    .content(review.getContent())
+                    .createdAt(review.getCreatedAt())
+                    .updatedAt(review.getUpdatedAt())
+                    .movieNo(movie.getMovieNo())
+                    .movieTitleKo(movie.getTitleKo())
+                    .movieTitle(movie.getTitle())
+                    .posterUrl(movie.getPosterUrl())
+                    .year(movie.getYear())
+                    .genre(movie.getGenre())
+                    .director(movie.getDirector())
+                    .cast(movie.getCast())
+                    .build();
+        }
+    }
 }
