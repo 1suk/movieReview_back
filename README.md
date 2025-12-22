@@ -86,7 +86,7 @@ User (1) ----< (N) Review (N) >---- (1) Movie
 ```
 ## 4. 주요 API 응답 
 
-#### 특정 영화 상세 조회 (`GET /api/movie/{id}`)
+#### 특정 영화 상세 조회 (`GET /api/movie/{movieNo}`)
 ```json
 {
     "movieNo": 3,
